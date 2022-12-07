@@ -2,7 +2,6 @@
 """
 Python script that, using the jsonplaceholder REST API, for a given employee
 ID, returns information about his/her TO-DO list progress.
-
 The script must accept an integer as a parameter, which is the employee ID.
 """
 import requests
