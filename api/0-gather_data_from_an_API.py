@@ -5,7 +5,7 @@ ID, returns information about his/her TO-DO list progress.
 The script must accept an integer as a parameter, which is the employee ID.
 """
 import requests
-import sys
+from sys import argv
 
 if __name__ == '__main__':
 
@@ -18,7 +18,7 @@ if __name__ == '__main__':
         'http://jsonplaceholder.typicode.com/todos').json()
     user_todos_list = [x for x in todos_request if x.get(
         'userId') == int(argv[1])]
-    
+
     user_complete_list = [
         x for x in user_todos_list if x.get('completed') is True]
 
@@ -26,6 +26,6 @@ if __name__ == '__main__':
         user_request.get('name'),
         len(user_complete_list),
         len(user_todos_list)))
-    
+
     for task in user_complete_list:
         print("\t " + task.get('title'))
