@@ -29,25 +29,3 @@ if __name__ == '__main__':
     
     for task in user_complete_list:
         print("\t " + task.get('title'))
-
-
-
-
-
-    api_url = 'https://jsonplaceholder.typicode.com/todos/?userId={}'.format(
-        emp_id)
-
-    user_response = requests.get(user_url).json().get('name')
-    api_response = requests.get(api_url).json()
-
-    for task in api_response:
-        total_tasks += 1
-        if task['completed'] is True:
-            finished_tasks += 1
-
-    print("Employee {} is done with tasks({}/{}):".format(user_response,
-          finished_tasks, total_tasks))
-
-    for task in api_response:
-        if task['completed'] is True:
-            print("\t {}".format(task['title']))
