@@ -9,16 +9,31 @@ import sys
 
 if __name__ == '__main__':
 
-    try:
-        emp_id = int(sys.argv[1])
-    except Exception:
-        print("Please insert an integer as a parameter")
-        exit()
-
     finished_tasks = 0
     total_tasks = 0
 
-    user_url = 'https://jsonplaceholder.typicode.com/users/{}'.format(emp_id)
+    user_request = requests.get(
+        'https://jsonplaceholder.typicode.com/users/{}'.format(argv[1])).json()
+    todos_request = requests.get(
+        'http://jsonplaceholder.typicode.com/todos').json()
+    user_todos_list = [x for x in todos_request if x.get(
+        'userId') == int(argv[1])]
+    
+    user_complete_list = [
+        x for x in user_todos_list if x.get('completed') is True]
+
+    print("Employee {} is done with tasks({}/{}):".format(
+        user_request.get('name'),
+        len(user_complete_list),
+        len(user_todos_list)))
+    
+    for task in user_complete_list:
+        print("\t " + task.get('title'))
+
+
+
+
+
     api_url = 'https://jsonplaceholder.typicode.com/todos/?userId={}'.format(
         emp_id)
 
